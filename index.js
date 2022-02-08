@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const connection = require("./database/database");
-const pergunta = require("./database/Pergunta");
+const Pergunta = require("./database/Pergunta");
 
 connection
     .authenticate()
@@ -35,7 +35,13 @@ app.get('/perguntar', (req, res) => {
 app.post('/salvarpergunta', (req, res) => {
     var titulo = req.body.titulo;
     var descricao = req.body.descricao;
-    res.send("Formulário enviado com sucesso!");
+
+    Pergunta.create({
+        titulo: titulo,
+        descricao: descricao
+    }).then(() => {
+        res.redirect('/');
+    });
 });
 
 //Inicia o servidor
