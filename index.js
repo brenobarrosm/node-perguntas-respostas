@@ -1,11 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const connection = require("./database/database");
+const pergunta = require("./database/Pergunta");
 
 connection
     .authenticate()
     .then(() => {
-        console.log("DB connection realizada");
+        console.log("DB connection realizada.");
     })
     .catch((error) => {
         console.log("Erro: " + error);
